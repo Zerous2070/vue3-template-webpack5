@@ -43,6 +43,7 @@
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.2",
     "chalk": "~4.1.2",
+    "compression-webpack-plugin": "^10.0.0",
     "copy-webpack-plugin": "^8.1.1",
     "css-loader": "^5.2.2",
     "css-minimizer-webpack-plugin": "^2.0.0",
