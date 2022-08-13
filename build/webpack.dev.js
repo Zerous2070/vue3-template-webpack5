@@ -33,7 +33,7 @@ const devWebpackConfig = merge(base, {
         host: config.host,
         port: config.port,
         watchFiles: {
-            path: ['src/**/*.vue', 'src/**/*.js', 'src/**/*.ts'],
+            paths: ['src/**/*.vue', 'src/**/*.js', 'src/**/*.ts'],
             options: {
                 usePolling: false
             }
@@ -42,11 +42,11 @@ const devWebpackConfig = merge(base, {
     module: {
         rules: [
             {
-                test: /\.(sa|sc)ss$/,
+                test: /\.(sa|sc|c)ss$/,
                 use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
-                test: '.(png|svg|jpg|gif)$',
+                test: /\.(png|svg|jpg|gif)$/,
                 type: 'asset/resource'
             }
         ]
@@ -65,22 +65,23 @@ module.exports = new Promise((resolve, reject) => {
     portfinder.basePort = process.env.PORT || config.port;
     portfinder.getPort((err, port) => {
         console.log('err,port :>>', err, port);
+        if (err) {
+            reject(err);
+        } else {
+            process.env.PORT = port;
+            devWebpackConfig.devServer.port = port;
+
+            devWebpackConfig.plugins.push(
+                new FriendlyErrorsPlugin({
+                    compilationSuccessInfo: {
+                        messages: [
+                            `Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`
+                        ]
+                    },
+                    onErrors: createNotifierCallback()
+                })
+            );
+            resolve(devWebpackConfig);
+        }
     });
-    if (err) {
-        reject(err);
-    } else {
-        process.env.PORT = port;
-        devWebpackConfig.devServer.port = port;
-
-        devWebpackConfig.plugins.push(
-            new FriendlyErrorsPlugin({
-                compilationSuccessInfo: {
-                    messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`]
-                },
-                onErrors: createNotifierCallback()
-            })
-        );
-
-        resolve(devWebpackConfig);
-    }
 });

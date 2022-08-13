@@ -19,11 +19,11 @@ module.exports = {
     module: {
         rules: [
             {
-                test: '/.vue$/',
+                test: /\.vue$/,
                 loader: 'vue-loader'
             },
             {
-                test: '.js$',
+                test: /\.js$/,
                 use: ['babel-loader'],
                 include: [joinPrePath('src')]
             },

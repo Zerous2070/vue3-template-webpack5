@@ -7,12 +7,7 @@ module.exports = {
         'vue/setup-compiler-macros': true
     },
     parser: 'vue-eslint-parser',
-    extends: [
-        'plugin:vue/vue3-strongly-recommended',
-        'plugin:@typescript-eslint/recommended',
-        'standard',
-        'prettier'
-    ],
+    extends: ['plugin:vue/vue3-strongly-recommended', 'plugin:@typescript-eslint/recommended', 'standard', 'prettier'],
     globals: {
         Atomics: 'readonly',
         SharedArrayBuffer: 'readonly'
@@ -22,10 +17,7 @@ module.exports = {
         ecmaVersion: 2020,
         sourceType: 'module'
     },
-    plugins: [
-        'vue',
-        '@typescript-eslint'
-    ],
+    plugins: ['vue', '@typescript-eslint'],
     rules: {
         'generator-star-spacing': 'off',
         'no-tabs': 'off',
@@ -43,7 +35,7 @@ module.exports = {
             'error',
             4,
             {
-                switchCase: 1,
+                SwitchCase: 1,
                 ignoredNodes: ['TemplateLiteral > *', 'ConditionalExpression *'],
                 flatTernaryExpressions: true,
                 offsetTernaryExpressions: true
@@ -54,8 +46,8 @@ module.exports = {
             'error',
             {
                 anonymous: 'always',
-                names: 'never',
-                'asyncArrow': 'always'
+                named: 'never',
+                asyncArrow: 'always'
             }
         ],
         'multiline-ternary': 'off',
@@ -81,4 +73,4 @@ module.exports = {
         // 限制自定义组件属性风格，never：必须驼峰，always：必须短横线
         'vue/attribute-hyphenation': ['error', 'always']
     }
-}
+};
